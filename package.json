@@ -1,0 +1,12 @@
+{
+  "name": "mongo-bongo",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "^4.9.8",
+    "express-handlebars": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/kevinparkerson/mongo-bongo.git"
+  }
+}
