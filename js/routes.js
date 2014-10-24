@@ -4,10 +4,13 @@ var express = require('express');
 
 //App Dependencies
 var create = require('./create');
+var del = require('./delete');
 var read = require('./read');
 var update = require('./update');
 
 var router = express.Router();
+
+//NOTE: poor use of express' action verbs here, might want to change that later on
 
 //GET home page
 router.get('/', function(req, res) {
@@ -72,6 +75,23 @@ router.post('/doupdate', function(req, res) {
 			res.render('error', { layout: 'error', error: data });
 		}else{
 			res.render('update-success', _.extend({ title: 'Update Success' }, data));
+		}
+	});
+});
+
+
+//GET delete page
+router.get('/deleteyoself', function(req, res) {
+	res.render('delete', { title: 'Delete' });
+});
+
+//POST delete
+router.post('/dodelete', function(req, res) {
+	del(req.body, function(err, data){
+		if(err){
+			res.render('error', { layout: 'error', error: data });
+		}else{
+			res.render('delete-success', _.extend({ title: 'Update' }, data));
 		}
 	});
 });

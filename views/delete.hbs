@@ -1,0 +1,49 @@
+{{#extend "styles"}}
+	<style type="text/css">
+		form {
+			width: 400px;
+		}
+
+		#alert {
+			display: none;
+		}
+	</style>
+{{/extend}}
+
+{{#extend "scripts"}}
+	<script>
+		$(function() {
+			$('#submitBtn').on('click', function () {
+				var hasMistake = false;
+				var name = $('#name').val();
+
+				if(!name){
+					$('#name').parent().addClass('has-error');
+					hasMistake = true;
+				}else{
+					$('#name').parent().removeClass('has-error');
+				}
+
+				if(hasMistake){
+					$('#alert').show();
+				}else{
+					$('#alert').hide();
+					$('#form').get(0).submit();
+				}
+			});
+		});
+	</script>
+{{/extend}}
+
+<div class="container">
+	<div><a href="/">Back</a></div>
+	<h1>Delete</h1>
+	<div class="alert alert-danger" id="alert" role="alert"><strong>You done goofed!</strong> Please correct highlighted fields</div>
+	<form action="/dodelete" id="form" method="post" role="form">
+		<div class="form-group">
+			<label class="control-label" for="name">Who's the chump you want offed? (must be string)</label>
+			<input class="form-control" id="name" placeholder="Enter name" name="name" type="text">
+		</div>
+		<button class="btn btn-default" id="submitBtn" type="button">Submit</button>
+	</form>
+</div>
