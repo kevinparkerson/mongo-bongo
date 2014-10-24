@@ -1,5 +1,9 @@
 //Basic Dependencies
+var _ = require('underscore');
 var express = require('express');
+
+//App Dependencies
+var create = require('./create');
 
 var router = express.Router();
 
@@ -16,8 +20,14 @@ router.get('/createyoself', function(req, res) {
 
 //POST create
 router.post('/docreate', function(req, res) {
-	console.log(req.body);
-	res.render('create-result', { title: 'Create Result' });
+	create(req.body, function(err, data){
+		if(err){
+			res.render('error', { layout: 'error', error: data });
+		}else{
+			res.render('create-success', _.extend({ title: 'Create Success' }, data));
+		}
+	});
 });
+
 
 module.exports = router;
