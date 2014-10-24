@@ -1,0 +1,19 @@
+{{#extend "styles"}}
+	<style type="text/css">
+		b {
+			color: #3c763d;
+			font-weight: normal;
+		}
+	</style>
+{{/extend}}
+
+<div class="container">
+	<div><a href="/">Back</a></div>
+	<h1>Read Result</h1>
+	{{#found}}
+		Found your bongo! Has name <b>"{{name}}"</b>, color <b>"{{color}}"</b>, number <b>"{{number}}"</b>, and dinosaurs <b>"{{dinosaurs}}"</b>
+	{{/found}}
+	{{#notfound}}
+		There's no bongo with the name <b>"{{name}}"</b>, dummy!
+	{{/notfound}}
+</div>
