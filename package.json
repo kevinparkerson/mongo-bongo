@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "^4.9.8",
-    "express-handlebars": "^1.1.0"
+    "express-handlebars": "^1.1.0",
+    "mongodb": "^1.4.19"
   },
   "repository": {
     "type": "git",
