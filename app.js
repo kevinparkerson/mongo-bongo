@@ -6,13 +6,13 @@ var http = require('http');
 var https = require('https');
 
 //Basic Dependencies
+var bodyParser = require('body-parser');
 var express = require('express');
 var expressHanlebars = require( 'express-handlebars' );
 var helpers = require('./lib/hbs-helpers');
-var MongoClient = require('mongodb').MongoClient;
 
 //App Dependencies
-var routes = require('./mc-files/routes');
+var routes = require('./routes');
 
 //Creating express application & setting port
 var app = express();
@@ -27,6 +27,10 @@ app.engine('hbs', expressHanlebars({
 }));
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
+
+//Configuring body parser
+app.use(bodyParser.json());	//to support JSON-encoded bodies
+app.use(bodyParser.urlencoded());	//to support URL-encoded bodies
 
 //Serving static content
 app.use(express.static(__dirname +'/public'));
