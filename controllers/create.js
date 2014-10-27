@@ -2,11 +2,11 @@
 var mongoose = require('mongoose');
 
 //App Dependencies
-var Bongo = require('./bongo');
+var Bongo = require('../models/bongo');
 
 var dbUrl = process.env.MONGOHQ_URL || 'mongodb://localhost/bongos';	//How you handle Heroku mongo, apparently (not tested yet)
 
-var read = function(body, callback){
+var create = function(body, callback){
 	var db;
 
 	//Connecting to our DB via mongoose
@@ -18,31 +18,29 @@ var read = function(body, callback){
 		callback(true, data);
 	});
 	db.once('open', function(){
-		Bongo.findOne({ name: body.name }, function(err, bngo){
+		var bongo = new Bongo({
+			color: body.color,
+			dinosaurs: (body.dinosaurs==='true') ? true : false,
+			name: body.name,
+			number: parseInt(body.number, 10)
+		});
+		bongo.save(function(err, bngo){
 			//Closing the connection
 			mongoose.connection.close();
 
 			//Calling back to routes
 			if(err){
-				callback(true, bngo);
+				callback(true, err);
 			}else{
-				if(bngo===null){
-					callback(null, {
-						name: body.name,
-						notfound: true
-					});
-				}else{
-					callback(null, {
-						found: true,
-						color: bngo.color,
-						dinosaurs: bngo.dinosaurs,
-						name: bngo.name,
-						number: bngo.number
-					});
-				}
+				callback(null, {
+					color: bngo.color,
+					dinosaurs: bngo.dinosaurs,
+					name: bngo.name,
+					number: bngo.number
+				});
 			}
 		});
 	});
 };
 
-module.exports = read;
+module.exports = create;

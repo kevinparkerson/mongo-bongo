@@ -12,7 +12,7 @@ var expressHanlebars = require( 'express-handlebars' );
 var helpers = require('./lib/hbs-helpers');
 
 //App Dependencies
-var routes = require('./js/routes');
+var routes = require('./controllers/routes');
 
 //Creating express application & setting port
 var app = express();

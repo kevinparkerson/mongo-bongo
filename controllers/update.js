@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 //App Dependencies
-var Bongo = require('./bongo');
+var Bongo = require('../models/bongo');
 
 var dbUrl = process.env.MONGOHQ_URL || 'mongodb://localhost/bongos';	//How you handle Heroku mongo, apparently (not tested yet)
 

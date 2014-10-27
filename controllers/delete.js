@@ -2,11 +2,11 @@
 var mongoose = require('mongoose');
 
 //App Dependencies
-var Bongo = require('./bongo');
+var Bongo = require('../models/bongo');
 
 var dbUrl = process.env.MONGOHQ_URL || 'mongodb://localhost/bongos';	//How you handle Heroku mongo, apparently (not tested yet)
 
-var create = function(body, callback){
+var del = function(body, callback){
 	var db;
 
 	//Connecting to our DB via mongoose
@@ -18,13 +18,7 @@ var create = function(body, callback){
 		callback(true, data);
 	});
 	db.once('open', function(){
-		var bongo = new Bongo({
-			color: body.color,
-			dinosaurs: (body.dinosaurs==='true') ? true : false,
-			name: body.name,
-			number: parseInt(body.number, 10)
-		});
-		bongo.save(function(err, bngo){
+		Bongo.remove({ name: body.name }, function(err){
 			//Closing the connection
 			mongoose.connection.close();
 
@@ -33,14 +27,11 @@ var create = function(body, callback){
 				callback(true, err);
 			}else{
 				callback(null, {
-					color: bngo.color,
-					dinosaurs: bngo.dinosaurs,
-					name: bngo.name,
-					number: bngo.number
+					name: body.name
 				});
 			}
 		});
 	});
 };
 
-module.exports = create;
+module.exports = del;
