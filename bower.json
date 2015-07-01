@@ -2,9 +2,9 @@
   "name": "mongo-bongo",
   "version": "0.0.1",
   "dependencies": {
-	"jquery": "~2.1.1",
-	"bootstrap": "~3.2.0",
-    "fuelux": "~3.1.0"
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "fuelux": "~3.9.0"
   },
   "devDependencies": {}
 }
