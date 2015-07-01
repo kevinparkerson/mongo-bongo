@@ -1,7 +1,7 @@
 mongo-bongo
 ===========
 
-Messing with that MongoDB
+A simple example of using MongoDB / Mongoose with Node and Express for basic CRUD operations
 
 ### Get it Running
 
